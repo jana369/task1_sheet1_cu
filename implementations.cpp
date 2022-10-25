@@ -109,17 +109,47 @@ BigDecimalInt BigDecimalInt :: operator+(BigDecimalInt anotherDec)
     return result_obj;
 }
 // a boolean function that checks if this object is less than anotherDec or not #jana
-bool BigDecimalInt::operator<(BigDecimalInt anotherDec)
+bool BigDecimalInt::operator>(BigDecimalInt anotherDec)
 {
-    int i = value.length();
-    int j = anotherDec.value.length();
-    if (i < j) {
-    return true;
+    if (anotherDec.sign == sign) {
+        int anotherDec_length = anotherDec.value.length();
+        int this_length = value.length();
 
-    }else{
-    return false;
+        if (this_length == anotherDec_length) {
+            for (int i = 0; i < anotherDec_length; i++) {
+                if (value[i] != anotherDec.value[i]) {
+                    if (value[i] > anotherDec.value[i]) {
+                        if (sign == '+')
+                            return true;
+                        else return false;
+                    }
+                    else {
+                        if (sign == '-')
+                            return true;
+                        else return false;
+                    }
+                }
+            }
+                return false;
+
+            }
+            else if (sign == '+') {
+            if (this_length > anotherDec_length) { return true; }
+            else 
+            { return false;
+            }
+             }
+            else {
+            if (this_length < anotherDec_length)return true;
+            else return false;
+            }
+        }
+        else {
+            if (anotherDec.sign == '+')
+                return true;
+            else return false;
+        }
     }
-}
 
 // a boolean function that checks if this object is equal to anotherDec or not #jana
 bool BigDecimalInt::operator==(BigDecimalInt anotherDec)
@@ -127,7 +157,7 @@ bool BigDecimalInt::operator==(BigDecimalInt anotherDec)
     int i = value.length();
     int j = anotherDec.value.length();
     if (i == j) {
-        for (int k = 0; k < value.length() - 1; k++) {
+        for (int k = 0; k < value.length(); k++) {
             if(value[0]== anotherDec.value[0])
             return true;
         }
